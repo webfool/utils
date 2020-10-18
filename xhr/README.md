@@ -102,8 +102,8 @@ xhr.send() 开始计算请求时间，xhr.loaded 事件代表请求结束
 "text"|String
 "json"|Javascript对象
 "blob"|Blob对象
-"arrayBuffer"|ArrayBuffer对象
-"document"|Document对象
+"arraybuffer"|ArrayBuffer对象
+"document"|Document对象，会将数据转化成一个 document 对象，把文本信息插入到 body 标签内
 
 #### 发送的数据类型
 > xhr.send(data) 
@@ -198,7 +198,32 @@ xhr.onreadystatechange = function () {
 - xhr.getResponseHeader() 获取特定头信息
 
 ## 获取 xhr.response 
-请求完成时，通过 xhr.response 获取数据。如果请求未完成，则通过 xhr.response 获取数据时，有如下情况：
-- responseType 为 '' 或 'text' 时，为目前已接收到的字符串
-- responseType 为 其它时，为 null
+responseType|response|responseText|responseXML
+-|-|-|-
+''|☑️|☑️|x
+'text'|☑️|☑️|x
+'json'|☑️|x|x
+'blob'|☑️|x|x
+'arraybuffer'|☑️|x|x
+'document'|☑️|x|☑️
 
+总结是：所有的 responseType 都能取 xhr.response，'' 和 text 能额外再取 xhr.responseText, 它的值等同于 xhr.response; document 能额外再取 responseXML，它的值等同于 xhr.response，所以最终不管 responseType 是什么，都取 xhr.response 即可。
+
+
+如果xhr 请求成功，但不满足 200 <= xhr.status < 300 或者 xhr.status === 304, 那么获取失败信息的方式应该为：
+-  ''、text、json 直接取 xhr.response，其中 '' 和 text 都能取到后端返回的信息，而 json 取到的是 null
+- blob
+```js
+const fileReader = new FileReader()
+fileReader.onload = function () {
+  const result = this.result
+  console.log('result ->', result) // 此处获取到后端返回的信息
+}
+fileReader.readAsText(blob)
+```
+- arraybuffer
+```js
+const decoder = new TextDecoder()
+const result = decoder.decode(xhr.response)
+console.log('result ->', result)
+```
