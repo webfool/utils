@@ -89,6 +89,10 @@ beacon|
 
 按name清除时间列表中的 measure entry，如果没有 name，那么清除所有 entryType 为 measure 的数据
 
+- performance.clearResourceTimings()
+
+清除时间列表中的 resource entry
+
 ##### 查询资源信息
 - performance.getEntries
 > 获取时间列表的所有数据，数组按 startTime 排序
@@ -124,6 +128,13 @@ performance.mark('start') // 触发事件
 - totalJSHeapSize: 已分配的内存数，按字节算
 - jsHeapSizeLimit: 可用内存的最大数，按字节算
 
+#### performance.timeOrigin
+
+返回页面第一次被创建的时间，它与 performance.timing 的 navigationStart 相近，但更精确
+```js
+performance.timing.navigationStart // 1603261721098
+performance.timeOrigin // 1603261721098.2861
+```
 #### performance.now
 
 返回 performance.navigationStart 到当前的毫秒数
