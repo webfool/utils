@@ -1,4 +1,4 @@
-bin 字段用于为包定义一些命令
+bin 字段用于为包定义一些命令，当包全局安装时作为全局命令，当包局部安装时，供 npm 的 script 内部调用。
 
 #### 命令的定义
 package.json 中的定义
@@ -18,8 +18,8 @@ package.json 中的定义
 console.log('testBin!!!')
 ```
 
-#### 下载之后使用
-假设B包中定义了以下的 package.json 配置
+#### 下载之后配合 script 使用
+- B包中定义了脚本命令
 ```js
 {
   ...
@@ -28,15 +28,24 @@ console.log('testBin!!!')
   }
 }
 ```
-直接在 A 包的命令行中执行 testBin
+- 下载 B 包之后，在 A 包中配置 script 命令
+```js
+{
+  ...
+  "scripts": {
+    "runTestBin": "testBin"
+  }
+}
+```
+- 执行 npm run runTestBin
 
 ##### 原理
 
-- 当A包 npm install B 之后，A 包的 node_module/.bin 下会生成一个软链接 testBin，指向 B 包下的 ./bin/test 文件。
-- 当在命令行中执行 testBin 时，会先把 A 包的 node_module/.bin 放到全局环境变量中，执行完后再将其从全局环境变量中移除。
+- 当A包 npm install B 之后，A 包的 node_module/.bin 下会生成一个软链接 testBin，指向 B 包下的 ./bin/test 文件。如果是全局安装，则会在 /usr/local/bin 下生成软链接
+- 执行 npm run runTestBin 时，会先把 A 包的 node_module/.bin 放到全局环境变量中，然后再将对应的脚本命令即 testBin 放入 shell 中执行，执行完后再将 node_module/.bin 从全局环境变量中移除
 
 
-#### 开发时使用
+#### 开发时测试
 ```js
 // 执行该命令之后，当前包变为全局包，当前包的 bin 命令变成全局命令
 npm link
