@@ -49,6 +49,9 @@ console.log('testBin!!!')
 ```js
 // 执行该命令之后，当前包变为全局包，当前包的 bin 命令变成全局命令
 npm link
+
+// 执行该命令之后，可以删除 link 生成的那些软链接
+npm unlink
 ```
 
 ##### 原理
