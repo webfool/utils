@@ -11,6 +11,9 @@
 npx node -v // 执行某个模块
 npx node@0.12.8 -v // 执行某个版本的模块
 npx -p lolcatjs -p cowsay -c 'cowsay hello | lolcatjs' // -p 指定下载的模块; -c 内部放执行命令
+
+npx --no-install cowsay hello // 只在本地找，找不到就报错
+npx --ignore-existing cowsay hello // 忽略本地，下载再使用
 ```
 
 ### nrm
