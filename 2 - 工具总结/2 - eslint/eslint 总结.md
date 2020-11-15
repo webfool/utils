@@ -129,7 +129,7 @@ npx eslint --init
       - node_modules/
       - 点文件/点文件夹
     - 主动忽略
-      - config 中配置 ignorePatterns 字段，内容路径相对于配置文件目录
+      - config 中配置 ignorePatterns 字段，内容路径相对于配置文件目录 (推荐，因为 eslint 只会找当前目录下的 .eslintignore，所以 vscode 打开项目的父级目录时，vscode 的 eslint 读取 .eslintignore 会失败，造成提示错误)
       - 配置 .eslintignore 文件（优先级更高），内容路径相对于配置文件目录
     - 校验忽略的文件
       - 校验默认忽略的文件
