@@ -1,7 +1,9 @@
 ### 总结
 ```js
 npm i eslint -D
-npx eslint --init
+npx eslint --init // 初始化 eslint 配置文件
+npx eslint src/ --ext .tsx,.ts --fix // 修复 src 目录下的 .tsx 和 .ts 后缀的文件
+
 ```
 
 - 【批量】eslint 可以依据 .eslintrc.js 配置文件进行校验和修复，通常在git commit 前校验和修复

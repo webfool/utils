@@ -1,3 +1,22 @@
+#### 结构
+- fetch
+  - 发起请求
+    - 开启：fetch(url, {method: 'GET'})
+    - 设置请求头
+      - options.headers
+      - cookies: credentials
+    - 设置请求体：options.body
+    - 设置对请求的要求
+      - mode: 同源/支持跨域
+  - 处理响应
+    - 监听事件
+      - catch：处理网络异常
+      - then：处理有响应的情况
+    - 有响应时，获取响应结果
+      - 状态码：response.status
+      - 响应头：response.headers
+      - 响应体：response.text()、json、blob、arrayBuffer、formData
+
 #### fetch 发起请求
 fetch 有两种调用方式:
 - fetch(url, options)：url 和配置的形式

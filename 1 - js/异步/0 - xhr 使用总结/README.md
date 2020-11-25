@@ -58,7 +58,33 @@ xhr.send(null)
 //   xhr.abort()
 // }, 2000)
 ```
-
+## 结构
+- ajax
+  - 发起请求
+    - xhr.open 开启
+    - 设置请求头
+      - setRequestHeader
+      - cookie： xhr.withCredentials
+    - 设置请求体 xhr.send()
+    - 设置对响应的要求
+      - 超时：xhr.timeout
+      - 返回内容转换格式：xhr.responseType
+  - 处理响应
+    - 监听响应事件
+      - onabort：通过 xhr.abort 中止时触发
+      - ontimeout：超时时触发
+      - onprogress：下载数据时触发
+      - onerror：网络异常时触发
+      - onload：服务器有响应时触发
+      - onloadend：所有情况最后都会触发
+    - 有响应时，获取响应结果
+      - 获取响应状态：xhr.status
+      - 获取响应头
+        - xhr.getAllResponseHeaders() 获取所有头信息
+        - xhr.getResponseHeader() 获取特定头信息
+      - 获取响应体：在 onload 事件中获取，大部分情况都是直接用 xhr.response
+        - 状态码[200, 300) 或者 304：直接用 xhr.response
+        - 否则：设置的 xhr.responseType 为 ''、text、json 时，也直接用 xhr.response，对于 blob、arraybuffer 需要解析
 
 ## 发起前
 #### 开启请求 open
