@@ -1,4 +1,7 @@
-为了避免多人协作时，npm install 安装不同版本的依赖，所以通过 package-lock 文件，用于锁定版本。
+### package-lock.json 的优点
+- 锁定版本：为了避免多人协作时，npm install 安装不同版本的依赖，所以通过 package-lock 文件
+- 了解包结构：安装的 node_module 结构和 package-lock.json 的结构一致
+- 优化安装过程：npm install 时，如果 node_module 中已存在对应的包，则会跳过安装
 
 ### 更新依赖版本的两种安装方式：
 

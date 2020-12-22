@@ -38,3 +38,6 @@ nrm del <源名称> // 删除源
 nrm test // 测试所有源的速度
 nrm test npm // 测试某个源的速度
 ```
+
+### 依赖冲突
+npm 会按 package.json 的依赖顺序将包安装在 node_modules 的第一层，如果遇到版本一样的包的则不再安装，如果遇到版本不一致，则后面的包会安装在对应依赖包的 node_modules 下。
