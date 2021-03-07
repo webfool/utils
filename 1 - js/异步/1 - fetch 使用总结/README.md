@@ -47,10 +47,10 @@ const headers = new Headers({
 })
 
 headers.append("X-Custom-Header", "AnotherValue"); // 新增
-headers.get("X-Custom-Header"); // 获取请求头的值，ProcessThisImmediately, AnotherValue
-headers.set('content-type', 'application/json') // 修改
 headers.delete('content-type') // 删除
+headers.set('content-type', 'application/json') // 修改
 headers.has("Content-Type") // 判断是否存在头
+headers.get("X-Custom-Header"); // 获取请求头的值，ProcessThisImmediately, AnotherValue
 ```
 - credentials: 是否携带 cookies
   - *omit: 不携带
@@ -79,10 +79,10 @@ fetch 的 response 包含如下属性：
   - opaque: Request mode 设置为 “no-cors”的响应
   - error: 出错
 - url: 响应的地址
-- headers: 响应头
 - status: 状态码
 - statusText: 状态信息
 - ok: 状态码在 200 ~ 299 为 true，其它为 false
+- headers: 响应头
 
 fetch 的 response 包含如下方法：
 - clone: 克隆一份响应信息

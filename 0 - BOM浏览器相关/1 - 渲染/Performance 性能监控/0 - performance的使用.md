@@ -1,5 +1,11 @@
 
-
+performance 功能：
+- 进入页面的方式和重定向次数信息
+- 统计整个页面加载各阶段时间点
+- 统计 js、css、img、xhr、fetch 等资源的加载时间
+- 统计页面绘制 first-paint 和 first-contentful-paint 的时间
+- 自定义时间打点和统计
+- 监听内存信息
 
 #### performance.navigation
 负责记录用户行为信息
@@ -19,10 +25,10 @@
 }
 ```
 
-#### 页面相关性能信息
-参考下一个文档的详细描述: performance.timing
+#### 页面相关性能信息 performance.timing
+参考下一个文档的详细描述
 
-#### 资源信息
+#### 资源信息 performance.getEntries()
 performance 时间列表中每一条测量数据都是一个 performanceEntry 对象。performanceEntry 对象的 entryType 有以下几种类型：
 - 【navigation】: name 值为页面URL。
 - 【resource】: name 值为请求资源的URL。
@@ -75,7 +81,7 @@ beacon|
 
 - performance.measure(name, startName, endName)
 
-往时间列表里生成一个用于测量的 performanceEntry 对象
+往时间列表里生成一个用于测量对应名称的两个 mark 的 performanceEntry 对象
 ```js
 // performance.measure('between', 'start', 'end')
 {

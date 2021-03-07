@@ -5,8 +5,8 @@
 字段|描述
 -|-
 navigationStart|开始的时间戳
-redirectStart|开始重定向
-redirectEnd|重定向结束
+redirectStart|第一个 http 重定向发生的时间
+redirectEnd|最后一个 http 重定向结束的时间
 fetchStart|开始请求数据
 domainLookupStart|开始解析域名
 domainLookupEnd|结束域名解析
@@ -33,7 +33,7 @@ redirect|重定向时间|redirectEnd - redirectStart| 拒绝重定向
 appCache|读取缓存耗时|domainLookupStart-fetchStart
 dns|DNS解析耗时|domainLookupEnd - domainLookupStart|是否有做 DNS 预加载
 tcp|TCP连接耗时|connectEnd - connectStart
-ssl|ssl安全连接耗时|connectEnd - secureConnectionStart
+ssl|https的ssl安全连接握手耗时|connectEnd - secureConnectionStart
 ttfb|Time To First Byte 接收到首字节所消耗的时间|responseStart - requestStart|是否加 CDN，是否加带宽、是否加 CPU 运算速度等
 response|内容加载耗时|responseEnd - responseStart|是否经过 gzip 压缩、静态资源 css/js 是否压缩
 fpt|First Paint Time 请求开始到浏览器首次解析第一批HTML文档字节的时间差|responseEnd - fetchStart|【重要】

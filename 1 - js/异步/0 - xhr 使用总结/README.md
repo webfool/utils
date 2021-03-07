@@ -71,10 +71,10 @@ xhr.send(null)
       - 返回内容转换格式：xhr.responseType
   - 处理响应
     - 监听响应事件
+      - onerror：网络异常时触发
       - onabort：通过 xhr.abort 中止时触发
       - ontimeout：超时时触发
       - onprogress：下载数据时触发
-      - onerror：网络异常时触发
       - onload：服务器有响应时触发
       - onloadend：所有情况最后都会触发
     - 有响应时，获取响应结果
@@ -223,6 +223,9 @@ xhr.onreadystatechange = function () {
 - xhr.getAllResponseHeaders() 获取所有头信息
 - xhr.getResponseHeader() 获取特定头信息
 
+#### 获取 xhr.status 和 xhr.statusText
+触发 onerror、onabort、ontimeout 时，xhr.status 都是0，xhr.statusText 为空字符串，xhr.response 为 null
+
 ## 获取 xhr.response 
 responseType|response|responseText|responseXML
 -|-|-|-
@@ -236,7 +239,10 @@ responseType|response|responseText|responseXML
 总结是：所有的 responseType 都能取 xhr.response，'' 和 text 能额外再取 xhr.responseText, 它的值等同于 xhr.response; document 能额外再取 responseXML，它的值等同于 xhr.response，所以最终不管 responseType 是什么，都取 xhr.response 即可。
 
 
-如果xhr 请求成功，但不满足 200 <= xhr.status < 300 或者 xhr.status === 304, 那么获取失败信息的方式应该为：
+当请求 onerror、onabort、ontimeout 时，xhr.response 都为 null。onload 时不管 xhr.status 的范围，都会将数据按 xhr.responseType 进行转换，然后存在 xhr.response 中。
+
+如果满足 200 <= xhr.status < 300 或者 xhr.status === 304, 那么直接返回 xhr.response 即可。
+否则，那么获取失败信息的方式应该为：
 -  ''、text、json 直接取 xhr.response，其中 '' 和 text 都能取到后端返回的信息，而 json 取到的是 null
 - blob
 ```js

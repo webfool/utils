@@ -41,3 +41,30 @@ nrm test npm // 测试某个源的速度
 
 ### 依赖冲突
 npm 会按 package.json 的依赖顺序将包安装在 node_modules 的第一层，如果遇到版本一样的包的则不再安装，如果遇到版本不一致，则后面的包会安装在对应依赖包的 node_modules 下。
+
+
+### nvm
+切换 node 版本
+
+##### 安装步骤
+```js
+cd ~
+ls -a
+touch ~/.bash_profile // 没有该文件则新建一个
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+
+// 如果没有在 .bash_profile 中加入如下内容，则加入
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source ~/.bash_profile // 重启使文件生效
+```
+
+##### 使用方式
+```js
+nvm list // 系统安装的 node 版本列表
+nvm version // 当前 node 版本
+nvm install <version>  // 安装特定版本的 node
+nvm use	
+```
